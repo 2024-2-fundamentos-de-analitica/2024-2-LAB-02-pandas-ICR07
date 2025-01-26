@@ -5,18 +5,39 @@ datos requeridos se encuentran en los archivos `tbl0.tsv`, `tbl1.tsv` y
 librerias de pandas para resolver las preguntas.
 """
 
+import pandas as pd
 
 def pregunta_13():
-    """
-    Si la columna `c0` es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`,
-    compute la suma de `tbl2.c5b` por cada valor en `tbl0.c1`.
 
-    Rta/
-    c1
-    A    146
-    B    134
-    C     81
-    D    112
-    E    275
-    Name: c5b, dtype: int64
-    """
+    tb0 = 'files/input/tbl0.tsv'
+    df1 = pd.read_csv(tb0, sep='\t')
+
+
+    tb2 = 'files/input/tbl2.tsv'
+    df2 = pd.read_csv(tb2, sep='\t')
+
+
+    df = pd.merge(df1, df2, on='c0', how='inner')
+
+    agrupados = df.groupby('c1')['c5b'].sum()
+    
+    return agrupados
+
+
+
+
+pregunta_13()
+
+"""
+Si la columna `c0` es la clave en los archivos `tbl0.tsv` y `tbl2.tsv`,
+compute la suma de `tbl2.c5b` por cada valor en `tbl0.c1`.
+
+Rta/
+c1
+A    146
+B    134
+C     81
+D    112
+E    275
+Name: c5b, dtype: int64
+"""
